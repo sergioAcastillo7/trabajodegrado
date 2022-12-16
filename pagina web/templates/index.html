@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a:link, a:visited, a:active {
+            text-decoration:none;
+            color: black;
+            font-size: x-large;
+        }
+        body {
+            margin: 100px 50px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 40px;
+        }
+        h2 {
+            text-align: center;
+            font-size: xx-large;
+        }
+        h3 {
+            text-align: center;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            width: 400px;
+            height: 100px;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+        .container {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logoUP {
+            width: 20%;
+        }
+        .logoIngE {
+            width: 20%;
+            height: 30vh;
+        }
+    </style>
+</head>
+<body>
+    <h2>Universidad de Pamplona</h2>
+    <h1>Arquitectura para monitoreo de variables físicas</h1>
+    <h2>Sergio Castillo</h2>
+
+    <div class="container">
+
+        <img src="{{ logoUP }}" alt="escudounipamplona" class="logoUP">
+        
+        <div class="buttons">
+            <button><a href="{{ url_for('temperatura')}}" > Visualizar el sensor de <br> Temperatura y Humedad</a></button>
+        
+            <button><a href="{{ url_for('lluvia')}}" > Visualizar el sensor de <br> Lluvia </a></button>
+        </div>
+
+        <img src="{{ logoIngE }}" alt="escudoingelectronica" class="logoIngE">
+    
+    </div>
+
+   
+    
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ title }}</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js'></script>
+    <script>
+      var mylabels = [
+        {% for item in labels %}
+            "{{ item }}",
+        {% endfor %}
+      ]
+
+      values1 = [
+        {% for item in values1 %}
+              {{ item }},
+        {% endfor %}
+      ]
+
+      values2 = [
+        {% for item in values2 %}
+              {{ item }},
+        {% endfor %}
+      ]
+
+      $(function () {
+          var ctx = document.getElementById("chart").getContext('2d');
+          var data = {
+              datasets: [{
+                  label: "Temperatura",
+                  borderColor: "#3cba9f",
+                  fill: false,
+                  data: values1,
+              }],
+              labels: mylabels
+          };
+          var myLineChart = new Chart(ctx, {
+              type: 'line',
+              data: data,
+              options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                    legend: {
+                        position: 'top',
+                            },
+                    title: {
+                      display: true,
+                      }
+                  }  
+              }
+          });
+
+          var ctx_2 = document.getElementById("chart2").getContext('2d');
+          var data_2 = {
+            datasets: [{
+                  label: "Humedad",
+                  borderColor: "#3cba9f",
+                  fill: false,
+                  data: values1,
+              }],
+              labels: mylabels
+          };
+          var myLineChart_2 = new Chart(ctx_2, {
+            type: 'line',
+              data: data_2,
+              options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                    legend: {
+                        position: 'top',
+                            },
+                    title: {
+                      display: true,
+                      }
+                  }  
+              }
+          });
+      });
+
+      $(document).ready(function(){
+        setTimeout(refrescar, 5000);
+      });
+      function refrescar(){
+        location.reload();
+        $(".canvas").load();
+      }
+    </script>
+    
+    <style>
+      h1 {
+        text-align: center;
+        margin-bottom: 0;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0;
+      }
+      .canvas {
+        width: 80%;
+        height: 40vh;
+      }
+      button {
+            width: 400px;
+            height: 60px;
+            margin-top: 30px;
+            font-size: x-large;
+            border-radius: 8px;
+      }
+      a:link, a:visited, a:active {
+          text-decoration:none;
+          color: black;
+      }
+    </style>
+</head>
+
+<body>
+    <h1>{{ title }}</h1>
+
+    <!-- <div><p> Last reading: <b>{{ last_temperature }} ℃ </b></p></div> -->
+    <div class="container">
+      <div class="canvas">
+        <canvas height="540" id="chart" width="960"></canvas>
+      </div>
+      
+      <div class="canvas">
+        <canvas height="540" id="chart2" width="960"></canvas>
+      </div>
+
+      <button> <a href="{{ url_for('index')}}"> Volver al menú principal </a></button>
+    </div>
+</body>
+</html>
